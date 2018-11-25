@@ -20,8 +20,8 @@ np.savetxt("wRR_" + str(lambda_input) + ".csv", wRR, delimiter="\n") # write out
 ## Solution for Part 2
 class activeLearning:
 
-	def __init__():
-		a
+	def __init__(X, y, X0, y0):
+		aw
 
 	def sort_new_data(new_data):
 	    return
