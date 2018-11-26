@@ -1,4 +1,4 @@
-	import numpy as np
+import numpy as np
 import sys
 
 lambda_input = int(sys.argv[1])
@@ -15,7 +15,6 @@ def ridge_regression(X_train, y_train, lambda_input):
 
 wRR = ridge_regression(X_train, y_train, input_lambda)
 np.savetxt("wRR_" + str(lambda_input) + ".csv", wRR, delimiter="\n") # write output to file
-
 
 ## Solution for Part 2
 class ridgeRegression:
@@ -40,6 +39,10 @@ class ridgeRegression:
 				np.linalg.inv(self.lmbda * self.sigma2 * np.eye(self.d) + np.dot(self.X,self.X.T)),
 				np.dot(self.X, self.y))
 
+	def fit(self):
+		inner_part = np.linalg.inv(self.lmbda * np.eye(self.n) + self.X_train * self.X_train.T)
+		return np.dot(inner_part * self.X_train, self.y_train)
+
 	def vmv_product(vector, matrix):
 		return np.dot( np.dot(vector.T, matrix), vector)
 
@@ -53,8 +56,8 @@ class ridgeRegression:
 		index = get_next_value
 		x0 = X_test[:, index]
 		y0 = y_test[index]
-		self.X_train = np.column_stack([self.X_train, self.x0])
-		self.y_train = np.hstack([self.y_train, self.y0])
+		self.X_train = np.column_stack([self.X_train, x0])
+		self.y_train = np.hstack([self.y_train, y0])
 
 	def part2():
 	    pass
