@@ -52,15 +52,22 @@ class ridgeRegression:
 	def get_next_value(self):
 		return sort_new_data()[-1]
 
-	def active_learning(self):
+	def active_learning_step(self):
 		index = get_next_value
 		x0 = X_test[:, index]
 		y0 = y_test[index]
 		self.X_train = np.column_stack([self.X_train, x0])
 		self.y_train = np.hstack([self.y_train, y0])
+		self.wRR = fit()
 
-	def part2():
-	    pass
+	def active_learning(self):
+		n0,_ = self.X_test.shape
+		for i in range(len(n0)):
+			active_learning_step()
+
+	def results(self):
+		return self.wRR
+
 
 active = part2()  # Assuming active is returned from the function
 np.savetxt("active_" + str(lambda_input) + "_" + str(int(sigma2_input)) + ".csv", active, delimiter=",") # write output \
