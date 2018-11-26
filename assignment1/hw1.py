@@ -1,4 +1,4 @@
-import numpy as np
+	import numpy as np
 import sys
 
 lambda_input = int(sys.argv[1])
@@ -18,17 +18,6 @@ np.savetxt("wRR_" + str(lambda_input) + ".csv", wRR, delimiter="\n") # write out
 
 
 ## Solution for Part 2
-class activeLearning:
-
-	def __init__(X, y, X0, y0):
-		aw
-
-	def sort_new_data(new_data):
-	    return
-
-	def vmv_product(vector, matrix):
-	    return np.dot( np.dot(vector.T, matrix), vector)
-
 class ridgeRegression:
 
 	def __init__(self, X_train, y_train, X_test, y_test, sigma2, lmbda):
@@ -44,11 +33,28 @@ class ridgeRegression:
 		self.wRR = None
 
 	def covariance_matrix(self):
-	    return np.linalg.inv((lmbda * np.eye(d)) + (sig ** -2) * np.dot(X, X.T))
+	    return np.linalg.inv((self.lmbda * np.eye(self.d)) + (self.sigma2 ** -2) * np.dot(self.X, self.X.T))
 
-	def mu_map(lmbda, sigma2, X, y):
-	    d,n = X.shape
-	    return np.dot(np.linalg.inv(lmbda * sigma2 * np.eye(d) + np.dot(X,X.T)), np.dot(X, y))
+	def mu_map(self):
+	    return np.dot(
+				np.linalg.inv(self.lmbda * self.sigma2 * np.eye(self.d) + np.dot(self.X,self.X.T)),
+				np.dot(self.X, self.y))
+
+	def vmv_product(vector, matrix):
+		return np.dot( np.dot(vector.T, matrix), vector)
+
+	def sort_new_data(self):
+	    return np.argsort(map(lambda x: vmv_product(x, self.cmatrix), self.X_test.T))
+
+	def get_next_value(self):
+		return sort_new_data()[-1]
+
+	def active_learning(self):
+		index = get_next_value
+		x0 = X_test[:, index]
+		y0 = y_test[index]
+		self.X_train = np.column_stack([self.X_train, self.x0])
+		self.y_train = np.hstack([self.y_train, self.y0])
 
 	def part2():
 	    pass
