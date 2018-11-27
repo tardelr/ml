@@ -13,7 +13,7 @@ def ridge_regression(X_train, y_train, lambda_input):
 	inner_part = np.linalg.inv(lambda_input*np.eye(d) + X_train*X_train.T)
 	return np.dot(inner_part * X_train, y_train)
 
-wRR = ridge_regression(X_train, y_train, input_lambda)
+wRR = ridge_regression(X_train, y_train, lambda_input)
 np.savetxt("wRR_" + str(lambda_input) + ".csv", wRR, delimiter="\n") # write output to file
 
 
@@ -34,10 +34,10 @@ def posterior_covariance_matrix(X,lmbda,sig,x0):
 
 def part2():
     cmatrix = covariance_matrix(X_train, y_train, lambda_input, sigma2_input)
-	index0 = []
-	sig_list = []
-	sigma2 = sigma2_input
-	while len(index0) < 10:
+    index0 = []
+    sig_list = []
+    sigma2 = sigma2_input
+    while len(index0) < 10:
 		for i in range(X0.shape[0]):
 			x0 = X0[i]
 			post_covariance = posterior_covariance_matrix(X, lambda_input, sigma2_input,x0)
@@ -47,7 +47,7 @@ def part2():
 		X0[idx] = False
 		index0.append(idx)
 		sigma2 = sig_list[idx]
-	return index0
+    return index0
 
 active = part2()  # Assuming active is returned from the function
 np.savetxt("active_" + str(lambda_input) + "_" + str(int(sigma2_input)) + ".csv", active, delimiter=",") # write output to file
